@@ -1,0 +1,42 @@
+telegram-libro-contable/
+│
+├─ README.md
+├─ requirements.txt
+├─ .env.example
+├─ .gitignore
+│
+├─ data/
+│   └─ contabilidad.db          # archivo SQLite (datos)
+│
+├─ src/
+│   ├─ main.py                  # punto de entrada del bot
+│   ├─ config.py                # configuraciones generales
+│   │
+│   ├─ domain/                  # REGLAS DEL NEGOCIO (tu lógica contable)
+│   │   ├─ categories.py        # categorías + fijo/variable
+│   │   ├─ accounts.py          # cuentas (crédito, débito, etc.)
+│   │   └─ keywords.py          # palabras gatillo (NLP simple)
+│   │
+│   ├─ parser/                  # entender lenguaje humano
+│   │   ├─ intent.py            # detectar intención (gasto, ingreso, transferencia)
+│   │   ├─ amount.py            # extraer monto
+│   │   ├─ date_parser.py       # fechas: hoy, ayer, 10/01
+│   │   ├─ category_parser.py   # detectar categoría
+│   │   ├─ account_parser.py    # detectar cuenta
+│   │   └─ message_parser.py    # orquestador (usa todo lo anterior)
+│   │
+│   ├─ storage/                 # manejo de archivos / BD
+│   │   ├─ database.py          # conexión SQLite
+│   │   ├─ schema.py            # creación de tablas
+│   │   └─ repository.py        # guardar y leer movimientos
+│   │
+│   ├─ services/                # lógica de alto nivel
+│   │   ├─ transactions.py     # crear gastos/ingresos/transferencias
+│   │   └─ reports.py           # resúmenes mensuales y por categoría
+│   │
+│   └─ bot/
+│       ├─ handlers.py          # comandos Telegram
+│       └─ responses.py         # textos que responde el bot
+│
+└─ logs/
+    └─ app.log
